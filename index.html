@@ -1116,6 +1116,7 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
         const g=id=>(form.elements[id]&&form.elements[id].value.trim())||'—';
         const color=(form.querySelector('input[name="teeColor"]:checked')||{}).value||'—';
         const size=sizeEl.value, q=qty(), total=unitPrice()*q;
+        const summary=q+'x '+color+' '+size+' — $'+total;
         const body=[
           'NEW TEE PRE-ORDER — Dottie Jordan 3 ON 3 For Peace (July 11)',
           '',
@@ -1133,14 +1134,52 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
           '',
           '— Sent from the 3ON3 For Peace tee pre-order form'
         ].join('\n');
-        window.location.href='mailto:'+TEE_EMAIL+
-          '?subject='+encodeURIComponent('Tee Pre-Order ('+q+'x '+color+' '+size+') — '+g('teeName'))+
-          '&body='+encodeURIComponent(body);
 
-        document.getElementById('teeSuccessMsg').textContent=
-          'Your email app just opened with your order ('+q+'x '+color+' '+size+', $'+total+') ready — hit send to finish. The Mr Shorts team will confirm your tee and pickup on July 11.';
-        form.style.display='none';
-        success.classList.add('show');
+        const submitBtn=form.querySelector('[type="submit"]');
+        const btnLabel=submitBtn?submitBtn.textContent:'';
+        if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Sending…';}
+
+        function showSuccess(msg){
+          document.getElementById('teeSuccessMsg').textContent=msg;
+          form.style.display='none';
+          success.classList.add('show');
+        }
+        function restoreBtn(){if(submitBtn){submitBtn.disabled=false;submitBtn.textContent=btnLabel;}}
+
+        // Fallback: if the email service can't be reached, open the customer's
+        // mail app pre-filled so the order is never lost.
+        function mailtoFallback(){
+          window.location.href='mailto:'+TEE_EMAIL+
+            '?subject='+encodeURIComponent('Tee Pre-Order ('+summary+') — '+g('teeName'))+
+            '&body='+encodeURIComponent(body);
+          showSuccess('Your order ('+summary+') is ready in your email app — just hit send to finish. The Mr Shorts team will email you an invoice and confirm pickup on July 11.');
+        }
+
+        // Deliver the order straight to stoneyw@gmail.com via FormSubmit (no redirect).
+        fetch('https://formsubmit.co/ajax/'+TEE_EMAIL,{
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({
+            _subject:'Tee Pre-Order ('+summary+') — '+g('teeName'),
+            _template:'table',
+            _captcha:'false',
+            'Order':summary,
+            'Color':color,
+            'Size':size,
+            'Quantity':String(q),
+            'Estimated total':'$'+total+' (pre-order price)',
+            'Customer name':g('teeName'),
+            'Phone':g('teePhone'),
+            'Email':g('teeEmail'),
+            'Notes / additional sizes':g('teeMsg')
+          })
+        }).then(r=>r.json()).then(()=>{
+          restoreBtn();
+          showSuccess('Order received! We\'ve got your '+summary+'. The Mr Shorts team will email you an invoice for payment and confirm pickup on July 11.');
+        }).catch(()=>{
+          restoreBtn();
+          mailtoFallback();
+        });
       });
     })();
   </script>
