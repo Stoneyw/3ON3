@@ -124,7 +124,14 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
 .hero .sub{color:var(--muted);max-width:440px;font-size:18px;margin:0 0 26px;}
 .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
 .hero-media{position:relative;}
-.hero-media image-slot,.hero-media img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:3px solid var(--orange);box-shadow:14px 14px 0 rgba(236,106,31,.22);transform:rotate(.6deg);}
+.hero-media image-slot,.hero-media .hero-carousel{display:block;width:100%;aspect-ratio:1/1;border-radius:8px;border:3px solid var(--orange);box-shadow:14px 14px 0 rgba(236,106,31,.22);transform:rotate(.6deg);}
+.hero-carousel{position:relative;overflow:hidden;background:#120d0a;}
+.hero-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease;}
+.hero-carousel img.is-active{opacity:1;}
+@media(prefers-reduced-motion:reduce){.hero-carousel img{transition:none;}}
+.hero-dots{position:absolute;right:12px;bottom:12px;display:flex;gap:7px;z-index:2;}
+.hero-dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.45);transition:background .25s,transform .25s;}
+.hero-dots button.is-active{background:var(--orange);transform:scale(1.25);}
 .hero-media .presented{
   position:absolute;left:-14px;bottom:-18px;background:#fff;color:var(--ink);
   font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
@@ -332,7 +339,7 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;gap:30px;padding:44px 0 54px;}
   .hero-media{order:-1;}
-  .hero-media img{aspect-ratio:1/1;}
+  .hero-media .hero-carousel{aspect-ratio:1/1;}
   .features .grid{grid-template-columns:repeat(2,1fr);}
   .feature:nth-child(2n){border-right:0;}
   .vendor-grid{grid-template-columns:repeat(2,1fr);}
@@ -489,7 +496,11 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
         </div>
       </div>
       <div class="hero-media">
-        <img id="hero-photo" src="assets/hero-matchup.webp" alt="MASH vs Crossfire Bats — team showdown, Saturday July 11, Dottie Jordan Park" />
+        <div class="hero-carousel" id="heroCarousel">
+          <img class="is-active" src="assets/hero-matchup.webp" alt="MASH vs Crossfire Bats — team showdown, Saturday July 11, Dottie Jordan Park" />
+          <img src="assets/hero-matchup-2.webp" alt="Isolaters vs TDC — team showdown, Saturday July 11, Dottie Jordan Park" />
+          <div class="hero-dots" id="heroDots"></div>
+        </div>
         <div class="presented">Presented by<b>MR SHORTS</b></div>
       </div>
     </div>
@@ -1043,6 +1054,36 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
       const upd=()=>sp.classList.toggle('previewable', s.hasAttribute('data-filled'));
       upd();new MutationObserver(upd).observe(s,{attributes:true,attributeFilter:['data-filled']});
     });
+
+    // ---- hero auto carousel (7s loop, crossfade, pause on hover) ----
+    (function(){
+      const root=document.getElementById('heroCarousel');
+      if(!root)return;
+      const slides=[...root.querySelectorAll('img')];
+      const dotsWrap=document.getElementById('heroDots');
+      if(slides.length<2){if(dotsWrap)dotsWrap.style.display='none';return;}
+      let i=0,timer=null;
+      const DELAY=7000;
+      const dots=slides.map((_,n)=>{
+        const b=document.createElement('button');
+        b.type='button';b.setAttribute('aria-label','Show matchup '+(n+1));
+        b.addEventListener('click',()=>{go(n);restart();});
+        dotsWrap.appendChild(b);return b;
+      });
+      function go(n){
+        i=(n+slides.length)%slides.length;
+        slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));
+        dots.forEach((d,k)=>d.classList.toggle('is-active',k===i));
+      }
+      function next(){go(i+1);}
+      function start(){stop();timer=setInterval(next,DELAY);}
+      function stop(){if(timer){clearInterval(timer);timer=null;}}
+      function restart(){start();}
+      go(0);start();
+      root.addEventListener('mouseenter',stop);
+      root.addEventListener('mouseleave',start);
+      document.addEventListener('visibilitychange',()=>{document.hidden?stop():start();});
+    })();
 
     // ---- tee presale: color preview, order modal, total, submit ----
     (function(){
