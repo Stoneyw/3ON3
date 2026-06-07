@@ -7,8 +7,313 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/site.css" />
-<meta name="ext-resource-dependency" content="assets/vendors/naynays-flyer.jpg" data-resource-id="naynaysFlyer" />
+<style id="site-css">
+/* ====== DOTTIE JORDAN 3ON3 — FOR PEACE :: brand stylesheet ====== */
+:root{
+  --ink:#100f0e;
+  --ink-2:#1b1917;
+  --panel:#211e1b;
+  --cream:#f6f1e7;
+  --cream-2:#ece3d3;
+  --paper:#fbf7ef;
+  --orange:#ec6a1f;
+  --orange-bright:#ff7d24;
+  --orange-deep:#c8500f;
+  --line-dark:#3a342d;
+  --muted:#b7ada0;
+  --muted-ink:#7c736682;
+  --shadow:0 18px 40px -18px rgba(0,0,0,.55);
+  --maxw:1200px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:78px;}
+body{
+  margin:0;
+  font-family:'Barlow',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  font-size:18px;line-height:1.55;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+.eyebrow{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;
+  text-transform:uppercase;letter-spacing:.18em;font-size:15px;color:var(--orange);
+}
+h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-spacing:.01em;margin:0;text-transform:uppercase;}
+.display{font-size:clamp(54px,9vw,118px);}
+.section-title{font-size:clamp(34px,5.2vw,62px);}
+.italic-skew{font-style:normal;transform:skewX(-7deg);display:inline-block;}
+
+/* star separators like the flyer */
+.stars{display:inline-flex;align-items:center;gap:14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;}
+.stars .s{color:var(--orange);font-size:.8em;}
+
+/* buttons */
+.btn{
+  --bg:var(--orange);--fg:#fff;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  font-size:19px;line-height:1;
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--bg);color:var(--fg);
+  border:2px solid transparent;border-radius:4px;
+  padding:15px 26px;cursor:pointer;transition:.15s transform,.15s background,.15s box-shadow;
+  box-shadow:0 6px 0 var(--orange-deep);
+}
+.btn:hover{transform:translateY(-1px);background:var(--orange-bright);}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--orange-deep);}
+.btn.ghost{background:transparent;color:var(--cream);border-color:#5a5147;box-shadow:none;}
+.btn.ghost:hover{background:rgba(236,106,31,.12);border-color:var(--orange);color:#fff;}
+.btn.dark{background:var(--ink);color:#fff;box-shadow:0 6px 0 #000;}
+.btn.dark:hover{background:#000;}
+.btn.lg{font-size:22px;padding:18px 32px;}
+
+/* chips */
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:15px;
+  border:1.5px solid currentColor;border-radius:999px;padding:7px 15px;
+}
+.chip svg{width:16px;height:16px;}
+
+/* ============ NAV ============ */
+.nav{
+  position:sticky;top:0;z-index:60;background:rgba(16,15,14,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid #2a2622;
+}
+.nav-inner{display:flex;align-items:center;gap:26px;height:72px;}
+.nav .brand{display:flex;align-items:center;gap:11px;color:#fff;}
+.nav .brand img{height:46px;width:auto;}
+.nav .brand b{font-family:'Anton',sans-serif;font-size:23px;letter-spacing:.02em;display:flex;align-items:baseline;gap:7px;}
+.nav .brand b span{color:var(--orange);}
+.nav .brand b i{font-family:'Barlow Condensed',sans-serif;font-style:normal;font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#cdbfa9;white-space:nowrap;}
+.nav .brand b i span{color:var(--orange);}
+.nav .links{display:flex;gap:26px;margin-left:auto;align-items:center;}
+.nav .links a{font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.07em;font-size:17px;color:#d8cfc2;transition:.15s;}
+.nav .links a:hover{color:#fff;}
+.nav .links .btn{font-size:16px;padding:12px 20px;box-shadow:0 4px 0 var(--orange-deep);}
+.nav-toggle{display:none;margin-left:auto;background:none;border:0;cursor:pointer;padding:8px;}
+.nav-toggle span{display:block;width:26px;height:3px;background:#fff;border-radius:2px;margin:5px 0;}
+
+/* ============ HERO ============ */
+.hero{position:relative;background:var(--ink);color:var(--cream);overflow:hidden;}
+.hero::before{/* spotlight + grain */
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 75% 0%, rgba(236,106,31,.35), transparent 55%),
+    radial-gradient(90% 80% at 10% 100%, rgba(236,106,31,.14), transparent 60%),
+    repeating-linear-gradient(58deg, rgba(255,255,255,.022) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg,#181512,#0d0c0b);
+  z-index:0;
+}
+.hero::after{/* bottom court fade */
+  content:"";position:absolute;left:0;right:0;bottom:0;height:140px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.5));z-index:0;
+}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:62px 0 70px;}
+.hero .eyebrow-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
+.hero .eyebrow-row .chip{color:#e9c9af;border-color:#5a473a;}
+.hero .eyebrow-row .chip.hot{color:#fff;background:var(--orange);border-color:var(--orange);}
+.hero .logo-art{max-width:430px;width:100%;filter:drop-shadow(0 14px 30px rgba(0,0,0,.6));margin-bottom:6px;}
+.hero h1.kicker{font-size:clamp(40px,6vw,82px);color:#fff;margin:4px 0 10px;}
+.hero h1.kicker .peace{color:var(--orange);}
+.hero .tag{margin:18px 0 6px;font-size:20px;}
+.hero .sub{color:var(--muted);max-width:440px;font-size:18px;margin:0 0 26px;}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+.hero-media{position:relative;}
+.hero-media image-slot{display:block;width:100%;height:480px;border-radius:8px;border:3px solid var(--orange);box-shadow:14px 14px 0 rgba(236,106,31,.22);transform:rotate(.6deg);}
+.hero-media .presented{
+  position:absolute;left:-14px;bottom:-18px;background:#fff;color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  font-size:14px;padding:9px 16px;border-radius:4px;box-shadow:var(--shadow);transform:rotate(-2deg);
+}
+.hero-media .presented b{font-family:'Anton';color:var(--orange);font-size:18px;display:block;letter-spacing:.02em;}
+
+/* ============ FEATURE STRIP ============ */
+.features{background:var(--orange);color:#fff;}
+.features .grid{display:grid;grid-template-columns:repeat(5,1fr);}
+.feature{padding:30px 18px;text-align:center;border-right:1px solid rgba(255,255,255,.22);}
+.feature:last-child{border-right:0;}
+.feature .ic{width:54px;height:54px;margin:0 auto 12px;display:grid;place-items:center;border:2.5px solid #fff;border-radius:50%;}
+.feature .ic svg{width:28px;height:28px;stroke:#fff;}
+.feature h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:.04em;}
+.feature p{margin:2px 0 0;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:14px;color:#ffe6d3;}
+
+/* ============ generic section ============ */
+.section{padding:84px 0;}
+.section.dark{background:var(--ink);color:var(--cream);}
+.section.cream{background:var(--cream);}
+.sec-head{margin-bottom:40px;max-width:780px;}
+.sec-head .eyebrow{display:block;margin-bottom:8px;}
+.sec-head p.lead{font-size:19px;color:#6f6557;margin:14px 0 0;}
+.section.dark .sec-head p.lead{color:var(--muted);}
+
+/* ============ VENDORS (primary) ============ */
+.vendor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.vendor{
+  background:#fff;border:1px solid #e6ddcc;border-radius:10px;overflow:hidden;
+  box-shadow:0 10px 24px -16px rgba(0,0,0,.35);transition:.15s transform,.15s box-shadow;
+}
+.vendor:hover{transform:translateY(-3px);box-shadow:0 18px 30px -16px rgba(0,0,0,.4);}
+.vendor{position:relative;}
+.vendor image-slot{display:block;width:100%;height:auto !important;aspect-ratio:1/1;background:#f3ece0;}
+.vendor .vlogo{display:block;width:100%;aspect-ratio:1/1;background:#0d0c0b;position:relative;overflow:hidden;cursor:pointer;}
+.vendor .vlogo img{width:100%;height:100%;object-fit:cover;display:block;}
+.vendor .proud{position:absolute;top:10px;left:10px;z-index:4;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;font-size:12px;color:#fff;background:var(--orange);border-radius:6px;padding:4px 9px;box-shadow:0 4px 10px -4px rgba(0,0,0,.6);}
+.vendor .zoom{position:absolute;top:10px;right:10px;z-index:5;width:36px;height:36px;border-radius:9px;border:0;cursor:pointer;background:rgba(13,12,11,.6);display:none;place-items:center;backdrop-filter:blur(4px);box-shadow:0 4px 10px -4px rgba(0,0,0,.55);transition:.15s background;}
+.vendor .zoom:hover{background:var(--orange);}
+.vendor .zoom svg{width:19px;height:19px;stroke:#fff;stroke-width:2.2;fill:none;}
+.vendor.previewable:hover .zoom{display:grid;}
+.vendor .meta{padding:14px 16px 16px;}
+.vendor .meta .cat{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:var(--orange);}
+.vendor .meta h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;margin:3px 0 0;color:var(--ink);text-transform:none;}
+.vendor .meta .booth{font-size:14px;color:#8a8073;font-weight:600;}
+.vendor-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.vendor-cta .note{color:#6f6557;font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+
+/* ============ ACTIVITIES ============ */
+.act-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.act{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line-dark);background:var(--panel);}
+.act image-slot{display:block;width:100%;height:200px;}
+.act img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;}
+.act .body{padding:18px 18px 22px;}
+.act .num{font-family:'Anton';color:var(--orange);font-size:15px;letter-spacing:.1em;}
+.act h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;margin:4px 0 6px;color:#fff;text-transform:none;}
+.act p{margin:0;font-size:16px;color:var(--muted);}
+
+/* ============ SPONSORS ============ */
+.presenting{text-align:center;margin-bottom:46px;}
+.presenting .eyebrow{display:block;margin-bottom:14px;}
+.presenting .ms{
+  font-family:'Anton',sans-serif;font-size:clamp(40px,7vw,82px);color:var(--ink);transform:skewX(-7deg);display:inline-block;white-space:nowrap;
+}
+.section.cream .presenting .ms{color:var(--ink);}
+.sponsor-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.sponsor{position:relative;background:#fff;border:1px solid #e6ddcc;border-radius:12px;aspect-ratio:3/4;overflow:hidden;box-shadow:0 14px 32px -24px rgba(0,0,0,.45);}
+.sponsor image-slot{display:block;width:100%;height:100%;}
+.sponsor image-slot::part(image){object-fit:cover;}
+.sponsor .flyer-btn{position:absolute;left:50%;bottom:12px;transform:translateX(-50%) translateY(6px);z-index:5;align-items:center;gap:7px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:13px;color:#fff;background:var(--orange);border:0;border-radius:999px;padding:9px 16px;cursor:pointer;box-shadow:0 8px 18px -6px rgba(0,0,0,.6);display:none;opacity:0;transition:.16s;}
+.sponsor .flyer-btn svg{width:15px;height:15px;stroke:#fff;stroke-width:2.3;fill:none;}
+.sponsor.previewable .flyer-btn{display:inline-flex;}
+.sponsor.previewable:hover .flyer-btn{opacity:1;transform:translateX(-50%) translateY(0);}
+.sponsor.has-flyer{cursor:pointer;}
+.sponsor.has-flyer img{width:100%;height:100%;object-fit:cover;display:block;}
+.sponsor-wall.solo{display:flex;justify-content:center;}
+.sponsor-wall.solo .sponsor{aspect-ratio:1/1;width:min(460px,100%);}
+
+/* tiered sponsor showcase — flyers shown at natural aspect ratio, no crop */
+.sponsor-feature{display:flex;justify-content:center;}
+.sponsor-feature .sponsor.feat{aspect-ratio:auto;width:min(380px,86vw);}
+.sponsor-feature .sponsor.feat img{position:static;width:100%;height:auto;object-fit:contain;}
+.sponsor-show{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:22px;max-width:1010px;margin:0 auto;}
+.sponsor-show .sponsor{aspect-ratio:auto;height:330px;width:auto;}
+.sponsor-show .sponsor img{position:static;width:auto;height:100%;object-fit:contain;}
+@media(max-width:720px){
+  .sponsor-show .sponsor{height:auto;width:min(330px,82vw);}
+  .sponsor-show .sponsor img{width:100%;height:auto;}
+}
+.sponsor-tier{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#a99a83;margin:34px 0 16px;font-size:15px;}
+
+/* ============ VENDOR FLYER LIGHTBOX ============ */
+.vlb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:30px;background:rgba(8,7,6,.92);backdrop-filter:blur(4px);}
+.vlb.open{display:flex;}
+.vlb img{max-width:min(92vw,820px);max-height:88vh;width:auto;height:auto;border-radius:10px;border:3px solid var(--orange);box-shadow:0 30px 60px -20px rgba(0,0,0,.8);}
+.vlb .x{position:absolute;top:22px;right:26px;width:48px;height:48px;border-radius:50%;border:2px solid #5a5147;background:rgba(0,0,0,.5);color:#fff;font-size:24px;cursor:pointer;display:grid;place-items:center;transition:.15s;}
+.vlb .x:hover{background:var(--orange);border-color:var(--orange);}
+.vlb .arw{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:2px solid #5a5147;background:rgba(0,0,0,.5);color:#fff;font-size:26px;cursor:pointer;display:grid;place-items:center;transition:.15s;}
+.vlb .arw:hover{background:var(--orange);border-color:var(--orange);}
+.vlb .arw.prev{left:24px;} .vlb .arw.next{right:24px;}
+.vlb .cap{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#f0d4bf;font-size:16px;}
+@media(max-width:640px){.vlb .arw{width:44px;height:44px;}.vlb .arw.prev{left:10px;}.vlb .arw.next{right:10px;}}
+
+/* ============ MAP / DETAILS ============ */
+.map-row{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:stretch;}
+.map-frame{border-radius:10px;overflow:hidden;border:3px solid var(--orange);box-shadow:12px 12px 0 rgba(236,106,31,.18);min-height:330px;}
+.map-frame iframe{width:100%;height:100%;min-height:330px;border:0;display:block;filter:saturate(1.05);}
+.detail-card .row{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid #e2d9c8;}
+.detail-card .row:last-child{border-bottom:0;}
+.detail-card .row .ic{flex:none;width:42px;height:42px;border-radius:8px;background:var(--orange);display:grid;place-items:center;}
+.detail-card .row .ic svg{width:22px;height:22px;stroke:#fff;}
+.detail-card .row .k{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8a8073;font-size:14px;}
+.detail-card .row .v{font-size:19px;font-weight:600;color:var(--ink);}
+
+/* ============ GALLERY ============ */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:14px;}
+.gallery image-slot{width:100%;height:100%;border-radius:8px;}
+.gallery img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block;}
+.gallery .tall{grid-row:span 2;}
+.gallery .wide{grid-column:span 2;}
+
+/* image-slot empty-state visibility on dark surfaces */
+.section.dark image-slot::part(frame),
+.gallery image-slot::part(frame),
+.hero-media image-slot::part(frame){background:rgba(255,255,255,.055) !important;}
+.section.dark image-slot::part(empty),
+.gallery image-slot::part(empty),
+.hero-media image-slot::part(empty){color:rgba(246,241,231,.6) !important;}
+
+/* ============ FINAL CTA ============ */
+.finalcta{position:relative;background:var(--orange);color:#fff;text-align:center;padding:78px 0;overflow:hidden;}
+.finalcta::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(58deg,rgba(0,0,0,.05) 0 2px,transparent 2px 11px);}
+.finalcta .inner{position:relative;z-index:2;}
+.finalcta h2{font-size:clamp(40px,7vw,86px);color:#fff;}
+.finalcta p{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:600;font-size:20px;margin:10px 0 26px;}
+.finalcta .btn.dark{box-shadow:0 7px 0 rgba(0,0,0,.45);}
+
+/* ============ FOOTER ============ */
+.footer{background:#0b0a09;color:#cabfb0;padding:56px 0 34px;}
+.footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;}
+.footer img.logo{height:96px;width:auto;margin-bottom:14px;}
+.footer .peace{font-family:'Anton',sans-serif;color:#fff;font-size:20px;letter-spacing:.02em;transform:skewX(-7deg);display:inline-block;}
+.footer h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#fff;font-size:16px;margin:0 0 12px;}
+.footer a{display:block;color:#cabfb0;padding:4px 0;font-size:16px;}
+.footer a:hover{color:var(--orange);}
+.footer .contact b{color:#fff;}
+.footer .bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:40px;padding-top:22px;border-top:1px solid #221f1b;font-size:14px;color:#8a8073;flex-wrap:wrap;}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:30px;padding:44px 0 54px;}
+  .hero-media{order:-1;}
+  .hero-media image-slot{height:300px;}
+  .features .grid{grid-template-columns:repeat(2,1fr);}
+  .feature:nth-child(2n){border-right:0;}
+  .vendor-grid{grid-template-columns:repeat(2,1fr);}
+  .act-grid{grid-template-columns:repeat(2,1fr);}
+  .sponsor-wall{grid-template-columns:repeat(2,1fr);}
+  .map-row{grid-template-columns:1fr;}
+  .footer .top{grid-template-columns:1fr;gap:26px;}
+}
+@media(max-width:640px){
+  body{font-size:17px;}
+  .nav .links{display:none;}
+  .nav .links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:#161311;padding:18px 28px 26px;gap:14px;border-bottom:1px solid #2a2622;}
+  .nav .links.open .btn{align-self:flex-start;}
+  .nav-toggle{display:block;}
+  .vendor-grid{grid-template-columns:1fr 1fr;}
+  .act-grid{grid-template-columns:1fr;}
+  .gallery{grid-template-columns:repeat(2,1fr);}
+  .section{padding:60px 0;}
+}
+
+</style>
+<meta name="ext-resource-dependency" content="assets/vendors/naynays-flyer.webp" data-resource-id="naynaysFlyer" />
+<meta name="ext-resource-dependency" content="assets/vendors/cooking-with-success.webp" data-resource-id="flyerCooking" />
+<meta name="ext-resource-dependency" content="assets/vendors/hyders-food-park.webp" data-resource-id="flyerHyders" />
+<meta name="ext-resource-dependency" content="assets/vendors/hot-rolls.webp" data-resource-id="flyerHotrolls" />
+<meta name="ext-resource-dependency" content="assets/vendors/better-than-good-cakes.webp" data-resource-id="flyerBetter" />
+<meta name="ext-resource-dependency" content="assets/vendors/heavenly-artillery.webp" data-resource-id="flyerHeavenly" />
+<meta name="ext-resource-dependency" content="assets/vendors/the-truth-lemonade.webp" data-resource-id="flyerTruth" />
+<meta name="ext-resource-dependency" content="assets/vendors/noras-secret.webp" data-resource-id="flyerNoras" />
+<meta name="ext-resource-dependency" content="assets/vendors/vics-cajun-croquettes.webp" data-resource-id="flyerVics" />
+<meta name="ext-resource-dependency" content="assets/vendors/king-arthur-seafood.webp" data-resource-id="flyerKingarthur" />
+<meta name="ext-resource-dependency" content="assets/vendors/fisher-foundation.webp" data-resource-id="flyerFisher" />
+<meta name="ext-resource-dependency" content="assets/sponsors/dusty-mccormick-realty.webp" data-resource-id="spDusty" />
+<meta name="ext-resource-dependency" content="assets/sponsors/travis-constable-pct1.webp" data-resource-id="spConstable" />
+<meta name="ext-resource-dependency" content="assets/sponsors/cooking-with-success-sponsor.webp" data-resource-id="spCooking" />
 <template id="__bundler_thumbnail" data-bg-color="#100f0e">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
     <rect width="1200" height="800" fill="#100f0e"/>
@@ -91,7 +396,7 @@
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#top">
-        <img src="assets/logo.png" alt="Dottie Jordan 3 on 3 logo" />
+        <img src="assets/logo.webp" alt="Dottie Jordan 3 on 3 logo" />
         <b>3<span>ON</span>3 <i>For <span>Peace</span></i></b>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -115,7 +420,7 @@
           <span class="chip">12:00 – 5:00 PM</span>
           <span class="chip">Dottie Jordan Park · Austin, TX</span>
         </div>
-        <img class="logo-art" src="assets/logo.png" alt="Dottie Jordan 3 on 3 Basketball Tournament — For Peace" />
+        <img class="logo-art" src="assets/logo.webp" alt="Dottie Jordan 3 on 3 Basketball Tournament — For Peace" />
         <p class="tag stars"><span class="s">★</span> Compete · Connect · Have Fun <span class="s">★</span></p>
         <p class="sub">3 on 3. One court. One community. One purpose — for peace, for unity, for our youth.</p>
         <div class="cta-row">
@@ -165,15 +470,16 @@
         <p class="lead">Local makers, food trucks and small businesses set up courtside all day. Roll through the vendor village between games — every dollar supports the community.</p>
       </div>
       <div class="vendor-grid">
-        <article class="vendor"><image-slot id="v1" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">Food Truck</span><h3>COOKING WITH SUCESS</h3><span class="booth">Booth 1</span></div></article>
-        <article class="vendor"><image-slot id="v2" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">BEVERAGES</span><h3>HYDER'S FOOD PARK</h3><span class="booth">Booth 2</span></div></article>
-        <article class="vendor"><image-slot id="v3" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">FOOD VENDOR</span><h3>HOT ROLLS</h3><span class="booth">Booth 3</span></div></article>
-        <article class="vendor"><image-slot id="v4" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">FOOD VENDOR</span><h3>BETTER THAN GOOD CAKES</h3><span class="booth">Booth 4</span></div></article>
-        <article class="vendor"><image-slot id="v5" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">CRAFT VENDOR</span><h3>HEAVENLY ARTILLERY</h3><span class="booth">Booth 5</span></div></article>
-        <article class="vendor"><image-slot id="v6" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">BEVERAGES</span><h3>THE TRUTH LEMONADE</h3><span class="booth">Booth 6</span></div></article>
-        <article class="vendor"><image-slot id="v7" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">CRAFT VENDOR</span><h3>NORA'S SECRETS</h3><span class="booth">Booth 7</span></div></article>
-        <article class="vendor"><image-slot id="v8" placeholder="Drop logo"></image-slot><div class="meta"><span class="cat">FOOD VENDOR</span><h3>VIC'S CAJUN CROQUETTES</h3><span class="booth">Booth 8</span></div></article>
-        <article class="vendor has-flyer" data-flyer="assets/vendors/naynays-flyer.jpg" data-name="NayNay's Lemonade N Sum More"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/naynays-logo.jpg" alt="NayNay's Lemonade N Sum More logo" /></div><div class="meta"><span class="cat">Lemonade &amp; Cajun</span><h3>NAYNAY'S LEMONADE N SUM MORE</h3><span class="booth">Booth 9</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/cooking-with-success.webp" data-name="Cooking With Success"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/cooking-with-success.webp" alt="Cooking With Success flyer" /></div><div class="meta"><span class="cat">Food Truck</span><h3>COOKING WITH SUCCESS</h3><span class="booth">Booth 1</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/hyders-food-park.webp" data-name="Hyder's Food Park"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/hyders-food-park.webp" alt="Hyder's Food Park flyer" /></div><div class="meta"><span class="cat">Juices &amp; Fruit</span><h3>HYDER'S FOOD PARK</h3><span class="booth">Booth 2</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/hot-rolls.webp" data-name="Hot Rolls"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/hot-rolls.webp" alt="Hot Rolls flyer" /></div><div class="meta"><span class="cat">Food Vendor</span><h3>HOT ROLLS</h3><span class="booth">Booth 3</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/better-than-good-cakes.webp" data-name="Better Than Good Cakes by Betty"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/better-than-good-cakes.webp" alt="Better Than Good Cakes flyer" /></div><div class="meta"><span class="cat">Desserts</span><h3>BETTER THAN GOOD CAKES</h3><span class="booth">Booth 4</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/heavenly-artillery.webp" data-name="Heavenly Artillery Custom Gifts"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/heavenly-artillery.webp" alt="Heavenly Artillery flyer" /></div><div class="meta"><span class="cat">Craft Vendor</span><h3>HEAVENLY ARTILLERY</h3><span class="booth">Booth 5</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/the-truth-lemonade.webp" data-name="The Truth Lemonade"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/the-truth-lemonade.webp" alt="The Truth Lemonade flyer" /></div><div class="meta"><span class="cat">Beverages</span><h3>THE TRUTH LEMONADE</h3><span class="booth">Booth 6</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/noras-secret.webp" data-name="Nora's Secret"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/noras-secret.webp" alt="Nora's Secret flyer" /></div><div class="meta"><span class="cat">Beauty &amp; Body</span><h3>NORA'S SECRET</h3><span class="booth">Booth 7</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/vics-cajun-croquettes.webp" data-name="Vic's Cajun Croquettes"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/vics-cajun-croquettes.webp" alt="Vic's Cajun Croquettes flyer" /></div><div class="meta"><span class="cat">Food Vendor</span><h3>VIC'S CAJUN CROQUETTES</h3><span class="booth">Booth 8</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/king-arthur-seafood.webp" data-name="King Arthur Crawfish &amp; Seafood"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/king-arthur-seafood.webp" alt="King Arthur Crawfish & Seafood flyer" /></div><div class="meta"><span class="cat">Seafood</span><h3>KING ARTHUR CRAWFISH &amp; SEAFOOD</h3><span class="booth">Booth 9</span></div></article>
+        <article class="vendor has-flyer" data-flyer="assets/vendors/naynays-flyer.webp" data-name="NayNay's Lemonade N Sum More"><div class="vlogo"><span class="proud">Proud Vendor</span><img src="assets/vendors/naynays-logo.webp" alt="NayNay's Lemonade N Sum More logo" /></div><div class="meta"><span class="cat">Lemonade &amp; Cajun</span><h3>NAYNAY'S LEMONADE N SUM MORE</h3><span class="booth">Booth 10</span></div></article>
       </div>
       <div class="vendor-cta">
         <a class="btn dark" href="vendor-registration.html">Become a Vendor</a>
@@ -191,10 +497,10 @@
         <p class="lead">It's more than a tournament — it's a block party. Bring the kids, bring the cooler, stay all afternoon.</p>
       </div>
       <div class="act-grid">
-        <article class="act"><image-slot id="a1" placeholder="Drop photo"></image-slot><div class="body"><span class="num">01</span><h3>Kids Hoops Zone</h3><p>Mini courts &amp; pop-a-shot for the little ballers.</p></div></article>
-        <article class="act"><image-slot id="a2" placeholder="Drop photo"></image-slot><div class="body"><span class="num">02</span><h3>Face Painting</h3><p>Free face painting &amp; giveaways all afternoon.</p></div></article>
-        <article class="act"><image-slot id="a3" placeholder="Drop photo"></image-slot><div class="body"><span class="num">03</span><h3>"DUNK" Contest</h3><p>Step up to the line — prizes for every age group.</p></div></article>
-        <article class="act"><image-slot id="a4" placeholder="Drop photo"></image-slot><div class="body"><span class="num">04</span><h3>Music by DJ Slice</h3><p>Keeping the energy up courtside, 12 to 5.</p></div></article>
+        <article class="act"><img src="assets/activities/kids-hoops-zone.webp" alt="01 — Kids Hoops Zone: mini courts &amp; pop-a-shot for the little ballers" loading="lazy" /></article>
+        <article class="act"><img src="assets/activities/face-painting.webp" alt="02 — Face Painting: free face painting &amp; giveaways all afternoon" loading="lazy" /></article>
+        <article class="act"><img src="assets/activities/dunk-contest.webp" alt="03 — Dunk Contest: step up to the line, prizes for every age group" loading="lazy" /></article>
+        <article class="act"><img src="assets/activities/dj-slyce.webp" alt="04 — Music by DJ Slyce: keeping the energy up courtside, 12 to 5" loading="lazy" /></article>
       </div>
     </div>
   </section>
@@ -207,12 +513,16 @@
         <div class="ms">MR SHORTS</div>
         <p class="lead" style="max-width:620px;margin:18px auto 0;">This day is powered by neighbors who believe in our youth. Want your name on the court? Let's talk.</p>
       </div>
-      <div class="sponsor-tier">Community Partners</div>
-      <div class="sponsor-wall">
-        <div class="sponsor"><image-slot id="s1" fit="cover" placeholder="Drop sponsor flyer"></image-slot></div>
-        <div class="sponsor"><image-slot id="s2" fit="cover" placeholder="Drop sponsor flyer"></image-slot></div>
-        <div class="sponsor"><image-slot id="s3" fit="cover" placeholder="Drop sponsor flyer"></image-slot></div>
-        <div class="sponsor"><image-slot id="s4" fit="cover" placeholder="Drop sponsor flyer"></image-slot></div>
+      <div class="sponsor-tier">Official Event Sponsor</div>
+      <div class="sponsor-feature">
+        <div class="sponsor has-flyer feat" data-flyer="assets/sponsors/dusty-mccormick-realty.webp" data-name="Dusty McCormick Realty — Official Event Sponsor"><img src="assets/sponsors/dusty-mccormick-realty.webp" alt="Dusty McCormick Realty — Official Event Sponsor flyer" /></div>
+      </div>
+
+      <div class="sponsor-tier">Proud Partners &amp; Sponsors</div>
+      <div class="sponsor-show">
+        <div class="sponsor has-flyer" data-flyer="assets/sponsors/travis-constable-pct1.webp" data-name="Travis County Constable Pct. 1 — Event Partner"><img src="assets/sponsors/travis-constable-pct1.webp" alt="Travis County Constable Pct. 1 — Event Partner flyer" /></div>
+        <div class="sponsor has-flyer" data-flyer="assets/sponsors/cooking-with-success-sponsor.webp" data-name="Cooking With Success — Food Truck Sponsor"><img src="assets/sponsors/cooking-with-success-sponsor.webp" alt="Cooking With Success — Food Truck Sponsor flyer" /></div>
+        <div class="sponsor has-flyer" data-flyer="assets/vendors/fisher-foundation.webp" data-name="Le'Nyce &amp; LeeAnthony Fisher Foundation — Community Partner"><img src="assets/vendors/fisher-foundation.webp" alt="Le'Nyce and LeeAnthony Fisher Foundation — Community Partner flyer" /></div>
       </div>
       <div style="text-align:center;margin-top:34px;"><button class="btn" type="button" id="openSponsor">Become a Sponsor</button></div>
     </div>
@@ -228,12 +538,12 @@
       <div class="map-row">
         <div class="map-frame">
           <iframe title="Dottie Jordan Park map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-97.6855%2C30.2905%2C-97.6560%2C30.3065&layer=mapnik&marker=30.2986%2C-97.6707"></iframe>
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-97.6855%2C30.3062%2C-97.6615%2C30.3222&layer=mapnik&marker=30.3142%2C-97.6735"></iframe>
         </div>
         <div class="detail-card">
           <div class="row">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11a7 7 0 0 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-            <div><div class="k">Location</div><div class="v">Dottie Jordan Park · Basketball Court<br>Austin, Texas</div></div>
+            <div><div class="k">Location</div><div class="v">Dottie Jordan Park · Basketball Court<br>2803 Loyola Ln, Austin, TX 78723</div></div>
           </div>
           <div class="row">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
@@ -244,7 +554,7 @@
             <div><div class="k">More Info</div><div class="v">512-350-7772 · @mrshortstx</div></div>
           </div>
           <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
-            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/Dottie+Jordan+Recreation+Center+Austin+TX">Open in Maps</a>
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=2803+Loyola+Ln+Austin+TX+78723">Open in Maps</a>
             <a class="btn ghost" style="--cream:var(--ink);color:var(--ink);border-color:#cdbfa9;" href="vendor-registration.html">Become a Vendor</a>
           </div>
         </div>
@@ -256,18 +566,19 @@
   <section class="section dark" id="gallery">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow">Last Year On The Court</span>
+        <span class="eyebrow">SHARING THE GOOD VIBES
+</span>
         <h2 class="section-title">Gallery</h2>
       </div>
       <div class="gallery">
-        <image-slot id="g1" class="tall" placeholder="Drop photo"></image-slot>
-        <image-slot id="g2" placeholder="Drop photo"></image-slot>
-        <image-slot id="g3" class="wide" placeholder="Drop photo"></image-slot>
-        <image-slot id="g4" placeholder="Drop photo"></image-slot>
-        <image-slot id="g5" class="wide" placeholder="Drop photo"></image-slot>
-        <image-slot id="g6" placeholder="Drop photo"></image-slot>
-        <image-slot id="g7" class="tall" placeholder="Drop photo"></image-slot>
-        <image-slot id="g8" placeholder="Drop photo"></image-slot>
+        <img class="tall" src="assets/posters/baxter-russell.webp" alt="Referee spotlight: Baxter Russell" loading="lazy" />
+        <img src="assets/activities/kids-hoops-zone.webp" alt="Kids Hoops Zone" loading="lazy" />
+        <img class="wide" src="assets/gallery/vendors-banner.webp" alt="Proud event vendors lineup" loading="lazy" />
+        <img src="assets/activities/face-painting.webp" alt="Face painting" loading="lazy" />
+        <img class="wide" src="assets/gallery/travis-constable-partner.webp" alt="Travis County Constable Pct. 1 — proud event partner" loading="lazy" />
+        <img src="assets/activities/dunk-contest.webp" alt="Dunk contest" loading="lazy" />
+        <img class="tall" src="assets/posters/stormin-norman.webp" alt="Referee spotlight: Stormin Norman" loading="lazy" />
+        <img src="assets/activities/dj-slyce.webp" alt="Music by DJ Slyce" loading="lazy" />
       </div>
     </div>
   </section>
@@ -290,7 +601,7 @@
     <div class="wrap">
       <div class="top">
         <div>
-          <img class="logo" src="assets/logo.png" alt="Dottie Jordan 3 on 3 logo" />
+          <img class="logo" src="assets/logo.webp" alt="Dottie Jordan 3 on 3 logo" />
           <div class="peace">For Peace · For Unity · For Our Youth</div>
         </div>
         <div>
@@ -394,13 +705,27 @@
   <script src="assets/image-slot.js"></script>
   <script>
     // ---- standalone: resolve JS-referenced resources to inlined blobs ----
-    if (window.__resources) {
-      const __map = {'assets/vendors/naynays-flyer.jpg':'naynaysFlyer'};
-      document.querySelectorAll('[data-flyer]').forEach(el=>{
-        const id=__map[el.dataset.flyer];
-        if(id && window.__resources[id]) el.dataset.flyer=window.__resources[id];
-      });
-    }
+    // resolve flyer paths to bundled resources lazily (standalone build) — no-op on the live site
+    window.__flyerMap = {
+        'assets/vendors/naynays-flyer.webp':'naynaysFlyer',
+        'assets/vendors/cooking-with-success.webp':'flyerCooking',
+        'assets/vendors/hyders-food-park.webp':'flyerHyders',
+        'assets/vendors/hot-rolls.webp':'flyerHotrolls',
+        'assets/vendors/better-than-good-cakes.webp':'flyerBetter',
+        'assets/vendors/heavenly-artillery.webp':'flyerHeavenly',
+        'assets/vendors/the-truth-lemonade.webp':'flyerTruth',
+        'assets/vendors/noras-secret.webp':'flyerNoras',
+        'assets/vendors/vics-cajun-croquettes.webp':'flyerVics',
+        'assets/vendors/king-arthur-seafood.webp':'flyerKingarthur',
+        'assets/vendors/fisher-foundation.webp':'flyerFisher',
+        'assets/sponsors/dusty-mccormick-realty.webp':'spDusty',
+        'assets/sponsors/travis-constable-pct1.webp':'spConstable',
+        'assets/sponsors/cooking-with-success-sponsor.webp':'spCooking',
+    };
+    window.__resolveFlyer = function(path){
+      if(path && window.__resources){ const id=window.__flyerMap[path]; if(id && window.__resources[id]) return window.__resources[id]; }
+      return path;
+    };
 
     const t = document.getElementById('navToggle');
     const l = document.getElementById('navLinks');
@@ -496,7 +821,7 @@
 
     // vendors
     const vendors=[...document.querySelectorAll('.vendor')];
-    function vSrc(v){return v.dataset.flyer || slotSrc(v.querySelector('image-slot'));}
+    function vSrc(v){return window.__resolveFlyer(v.dataset.flyer) || slotSrc(v.querySelector('image-slot'));}
     function vName(v){return v.dataset.name||(v.querySelector('h3')&&v.querySelector('h3').textContent.trim())||'';}
     function vList(){return vendors.filter(v=>v.classList.contains('previewable')).map(v=>({src:vSrc(v),name:vName(v)})).filter(x=>x.src);}
     function openVendor(v){const list=vList();const i=list.findIndex(x=>x.src===vSrc(v));gOpen(list,i);}
@@ -512,12 +837,16 @@
 
     // sponsors
     const sponsors=[...document.querySelectorAll('.sponsor')];
-    function spList(){return sponsors.filter(sp=>sp.classList.contains('previewable')).map(sp=>({src:slotSrc(sp.querySelector('image-slot')),name:'Sponsor Flyer'})).filter(x=>x.src);}
+    function spSrc(sp){return window.__resolveFlyer(sp.dataset.flyer) || slotSrc(sp.querySelector('image-slot'));}
+    function spName(sp){return sp.dataset.name||'Sponsor Flyer';}
+    function spList(){return sponsors.filter(sp=>sp.classList.contains('previewable')).map(sp=>({src:spSrc(sp),name:spName(sp)})).filter(x=>x.src);}
+    function openSp(sp){const list=spList();const my=spSrc(sp);const i=list.findIndex(x=>x.src===my);gOpen(list,i);}
     sponsors.forEach(sp=>{
-      const s=sp.querySelector('image-slot');if(!s)return;
-      const btn=document.createElement('button');btn.className='flyer-btn';btn.type='button';btn.innerHTML=EYE+'Preview Flyer';
-      btn.addEventListener('click',e=>{e.stopPropagation();const list=spList();const my=slotSrc(s);const i=list.findIndex(x=>x.src===my);gOpen(list,i);});
+      const btn=document.createElement('button');btn.className='flyer-btn';btn.type='button';btn.innerHTML=EYE+'View Flyer';
+      btn.addEventListener('click',e=>{e.stopPropagation();openSp(sp);});
       sp.appendChild(btn);
+      if(sp.dataset.flyer){sp.classList.add('previewable');sp.addEventListener('click',()=>openSp(sp));return;}
+      const s=sp.querySelector('image-slot');if(!s)return;
       const upd=()=>sp.classList.toggle('previewable', s.hasAttribute('data-filled'));
       upd();new MutationObserver(upd).observe(s,{attributes:true,attributeFilter:['data-filled']});
     });
