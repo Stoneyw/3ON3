@@ -429,6 +429,9 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
   .sp-actions .btn{border:0;}
   .sp-actions .callnote{font-size:14px;color:#8a8073;line-height:1.4;flex:1;min-width:180px;}
   .sp-actions .callnote a{color:var(--orange-deep);font-weight:700;white-space:nowrap;}
+  .pay-note{margin:14px 2px 0;font-size:14px;line-height:1.5;color:#8a8073;}
+  .pay-note b{color:var(--ink);font-weight:700;}
+  .pay-note a{color:var(--orange-deep);font-weight:700;white-space:nowrap;}
 
   .sp-success{display:none;text-align:center;padding:10px 4px 6px;}
   .sp-success.show{display:block;}
@@ -735,7 +738,7 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
       <div class="sp-head">
         <span class="eyebrow">Official Event Tee · Pre-Order</span>
         <h2 id="teeTitle">Pre-Order Your <span class="o">Tee</span></h2>
-        <p>Reserve your shirt now at the $22 pre-order price and pick it up at Dottie Jordan Park on July 11. The Mr Shorts team will confirm your order and pickup.</p>
+        <p>Get your shirt at the $22 pre-order price and pick it up at Dottie Jordan Park on July 11. Pay online now with card, or reserve and we'll send you an invoice.</p>
       </div>
 
       <div class="sp-body">
@@ -802,9 +805,10 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
           </div>
 
           <div class="sp-actions">
-            <button class="btn lg" type="submit">Place Pre-Order</button>
-            <span class="callnote">Prefer to talk? Call <a href="tel:5123507772">512-350-7772</a></span>
+            <a class="btn lg" id="teePayNow" href="https://square.link/u/mPDt3AR9" target="_blank" rel="noopener">Pay Now With Square</a>
+            <button class="btn ghost lg" type="submit">Reserve — Invoice Me</button>
           </div>
+          <p class="pay-note">✅ <b>Pay Now</b> takes you to our secure Square checkout — pick your size &amp; color there and you're done. Rather be billed? Hit <b>Reserve</b> and the Mr Shorts team will email you an invoice. Questions? Call <a href="tel:5123507772">512-350-7772</a>.</p>
         </form>
 
         <div class="sp-success" id="teeSuccess">
@@ -1117,70 +1121,48 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
         const color=(form.querySelector('input[name="teeColor"]:checked')||{}).value||'—';
         const size=sizeEl.value, q=qty(), total=unitPrice()*q;
         const summary=q+'x '+color+' '+size+' — $'+total;
-        const body=[
-          'NEW TEE PRE-ORDER — Dottie Jordan 3 ON 3 For Peace (July 11)',
-          '',
-          'Color:    '+color,
-          'Size:     '+size,
-          'Quantity: '+q,
-          'Estimated total: $'+total+' (pre-order price)',
-          '',
-          'Name:  '+g('teeName'),
-          'Phone: '+g('teePhone'),
-          'Email: '+g('teeEmail'),
-          '',
-          'Notes / additional sizes:',
-          '  '+g('teeMsg'),
-          '',
-          '— Sent from the 3ON3 For Peace tee pre-order form'
-        ].join('\n');
 
         const submitBtn=form.querySelector('[type="submit"]');
-        const btnLabel=submitBtn?submitBtn.textContent:'';
         if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Sending…';}
 
-        function showSuccess(msg){
-          document.getElementById('teeSuccessMsg').textContent=msg;
-          form.style.display='none';
-          success.classList.add('show');
-        }
-        function restoreBtn(){if(submitBtn){submitBtn.disabled=false;submitBtn.textContent=btnLabel;}}
+        // Remember the order so we can confirm it when FormSubmit redirects back.
+        try{sessionStorage.setItem('teeOrder',summary);}catch(_){}
 
-        // Fallback: if the email service can't be reached, open the customer's
-        // mail app pre-filled so the order is never lost.
-        function mailtoFallback(){
-          window.location.href='mailto:'+TEE_EMAIL+
-            '?subject='+encodeURIComponent('Tee Pre-Order ('+summary+') — '+g('teeName'))+
-            '&body='+encodeURIComponent(body);
-          showSuccess('Your order ('+summary+') is ready in your email app — just hit send to finish. The Mr Shorts team will email you an invoice and confirm pickup on July 11.');
-        }
-
-        // Deliver the order straight to stoneyw@gmail.com via FormSubmit (no redirect).
-        fetch('https://formsubmit.co/ajax/'+TEE_EMAIL,{
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body:JSON.stringify({
-            _subject:'Tee Pre-Order ('+summary+') — '+g('teeName'),
-            _template:'table',
-            _captcha:'false',
-            'Order':summary,
-            'Color':color,
-            'Size':size,
-            'Quantity':String(q),
-            'Estimated total':'$'+total+' (pre-order price)',
-            'Customer name':g('teeName'),
-            'Phone':g('teePhone'),
-            'Email':g('teeEmail'),
-            'Notes / additional sizes':g('teeMsg')
-          })
-        }).then(r=>r.json()).then(()=>{
-          restoreBtn();
-          showSuccess('Order received! We\'ve got your '+summary+'. The Mr Shorts team will email you an invoice for payment and confirm pickup on July 11.');
-        }).catch(()=>{
-          restoreBtn();
-          mailtoFallback();
-        });
+        // Submit as a STANDARD FormSubmit POST (not AJAX). This is the path that
+        // performs the one-time email activation AND reliably delivers every order.
+        const post=document.createElement('form');
+        post.method='POST';
+        post.action='https://formsubmit.co/'+TEE_EMAIL;
+        post.style.display='none';
+        const add=(n,v)=>{const i=document.createElement('input');i.type='hidden';i.name=n;i.value=v;post.appendChild(i);};
+        add('_subject','Tee Pre-Order ('+summary+') — '+g('teeName'));
+        add('_template','table');
+        add('_captcha','false');
+        add('_next',location.origin+location.pathname+'#tee-thanks');
+        add('Order',summary);
+        add('Color',color);
+        add('Size',size);
+        add('Quantity',String(q));
+        add('Estimated total','$'+total+' (pre-order price)');
+        add('Customer name',g('teeName'));
+        add('Phone',g('teePhone'));
+        add('Email',g('teeEmail'));
+        add('Notes / additional sizes',g('teeMsg'));
+        document.body.appendChild(post);
+        post.submit();
       });
+
+      // FormSubmit redirects the customer back here after a successful order.
+      if(location.hash==='#tee-thanks'){
+        let s='your order';
+        try{s=sessionStorage.getItem('teeOrder')||s;sessionStorage.removeItem('teeOrder');}catch(_){}
+        open();
+        document.getElementById('teeSuccessMsg').textContent=
+          'Order received! We\'ve got '+s+'. The Mr Shorts team will email you an invoice for payment and confirm pickup on July 11.';
+        form.style.display='none';
+        success.classList.add('show');
+        if(history.replaceState)history.replaceState(null,'',location.pathname);
+      }
     })();
   </script>
 </body>
