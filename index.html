@@ -124,7 +124,7 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
 .hero .sub{color:var(--muted);max-width:440px;font-size:18px;margin:0 0 26px;}
 .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
 .hero-media{position:relative;}
-.hero-media image-slot{display:block;width:100%;height:480px;border-radius:8px;border:3px solid var(--orange);box-shadow:14px 14px 0 rgba(236,106,31,.22);transform:rotate(.6deg);}
+.hero-media image-slot,.hero-media img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:3px solid var(--orange);box-shadow:14px 14px 0 rgba(236,106,31,.22);transform:rotate(.6deg);}
 .hero-media .presented{
   position:absolute;left:-14px;bottom:-18px;background:#fff;color:var(--ink);
   font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
@@ -278,7 +278,7 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;gap:30px;padding:44px 0 54px;}
   .hero-media{order:-1;}
-  .hero-media image-slot{height:300px;}
+  .hero-media img{aspect-ratio:1/1;}
   .features .grid{grid-template-columns:repeat(2,1fr);}
   .feature:nth-child(2n){border-right:0;}
   .vendor-grid{grid-template-columns:repeat(2,1fr);}
@@ -429,7 +429,7 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
         </div>
       </div>
       <div class="hero-media">
-        <image-slot id="hero-photo" placeholder="Drop an action / court photo" fit="cover" shape="rounded" radius="6"></image-slot>
+        <img id="hero-photo" src="assets/hero-matchup.webp" alt="MASH vs Crossfire Bats — team showdown, Saturday July 11, Dottie Jordan Park" />
         <div class="presented">Presented by<b>MR SHORTS</b></div>
       </div>
     </div>
