@@ -184,6 +184,60 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
 .act h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;margin:4px 0 6px;color:#fff;text-transform:none;}
 .act p{margin:0;font-size:16px;color:var(--muted);}
 
+/* ============ TEES / MERCH ============ */
+.section.tees{background:var(--ink);color:var(--cream);position:relative;overflow:hidden;}
+.section.tees::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(90% 80% at 12% 0%, rgba(236,106,31,.20), transparent 56%),
+  repeating-linear-gradient(58deg,rgba(255,255,255,.025) 0 2px,transparent 2px 12px);pointer-events:none;}
+.tee-row{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;}
+.tee-stage{position:relative;}
+.tee-main{position:relative;background:linear-gradient(180deg,#26221e,#171513);border:1px solid var(--line-dark);border-radius:16px;padding:26px;box-shadow:14px 14px 0 rgba(236,106,31,.16);}
+.tee-main img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:10px;}
+.tee-pricetag{position:absolute;top:-16px;right:-14px;z-index:3;background:var(--orange);color:#fff;border-radius:8px;padding:11px 16px;text-align:center;transform:rotate(3deg);box-shadow:0 10px 0 var(--orange-deep);}
+.tee-pricetag .pre{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:12px;line-height:1;opacity:.92;}
+.tee-pricetag .amt{font-family:'Anton',sans-serif;font-size:34px;line-height:.9;}
+.tee-swatches{display:flex;gap:14px;margin-top:22px;justify-content:center;}
+.tee-sw{width:54px;cursor:pointer;border:0;background:none;padding:0;text-align:center;}
+.tee-sw .dot{display:block;width:42px;height:42px;margin:0 auto 6px;border-radius:50%;border:2.5px solid #4a423a;transition:.15s;box-shadow:inset 0 0 0 2px rgba(0,0,0,.25);}
+.tee-sw .lbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:12px;color:#9b9184;transition:.15s;}
+.tee-sw[aria-pressed="true"] .dot{border-color:var(--orange);transform:scale(1.06);box-shadow:0 0 0 3px rgba(236,106,31,.25),inset 0 0 0 2px rgba(0,0,0,.25);}
+.tee-sw[aria-pressed="true"] .lbl{color:#fff;}
+.tee-info .eyebrow{display:block;margin-bottom:12px;}
+.tee-info h2{font-size:clamp(34px,4.6vw,58px);color:#fff;}
+.tee-info h2 .o{color:var(--orange);}
+.tee-info .lead{color:var(--muted);font-size:18px;max-width:460px;margin:16px 0 24px;}
+.tee-pricecompare{display:flex;align-items:flex-end;gap:18px;margin:0 0 22px;}
+.tee-pricecompare .now{font-family:'Anton',sans-serif;font-size:62px;line-height:.85;color:#fff;}
+.tee-pricecompare .now span{color:var(--orange);}
+.tee-pricecompare .at{font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.05em;font-size:15px;color:#b7ada0;line-height:1.35;padding-bottom:6px;}
+.tee-pricecompare .at b{color:#fff;font-weight:700;}
+.tee-pricecompare .at s{color:#7c7366;}
+.tee-specs{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:13px;}
+.tee-specs li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:var(--cream);}
+.tee-specs li svg{flex:none;width:22px;height:22px;stroke:var(--orange);stroke-width:2.2;fill:none;margin-top:1px;}
+.tee-specs li b{color:#fff;}
+.tee-cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.tee-cta-row .sizenote{font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:14px;color:#b7ada0;}
+
+/* tee order modal extras (reuses .sp-modal styles) */
+.tee-modal .swatch-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.tee-modal .csw{cursor:pointer;}
+.tee-modal .csw input{position:absolute;opacity:0;width:0;height:0;}
+.tee-modal .csw .chip2{display:flex;align-items:center;gap:9px;border:1.6px solid #ddd2bf;border-radius:9px;padding:9px 14px 9px 11px;background:#fbf8f2;transition:.14s;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:14px;color:#6f6557;}
+.tee-modal .csw .chip2 i{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(0,0,0,.2);}
+.tee-modal .csw input:checked + .chip2{border-color:var(--orange);background:#fff;color:var(--ink);box-shadow:0 0 0 3px rgba(236,106,31,.13);}
+.tee-modal select{font-family:'Barlow',sans-serif;font-size:16px;color:var(--ink);background:#fbf8f2;border:1.5px solid #ddd2bf;border-radius:9px;padding:12px 14px;outline:none;transition:.14s;width:100%;}
+.tee-modal select:focus{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(236,106,31,.13);}
+.tee-qty{display:inline-flex;align-items:stretch;border:1.5px solid #ddd2bf;border-radius:9px;overflow:hidden;background:#fbf8f2;}
+.tee-qty button{width:46px;border:0;background:#f0e7d8;color:var(--ink);font-size:22px;cursor:pointer;font-family:'Anton',sans-serif;line-height:1;}
+.tee-qty button:hover{background:var(--orange);color:#fff;}
+.tee-qty input{width:58px;text-align:center;border:0;background:transparent;font-family:'Anton',sans-serif;font-size:20px;color:var(--ink);outline:none;-moz-appearance:textfield;}
+.tee-qty input::-webkit-outer-spin-button,.tee-qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.tee-total{display:flex;justify-content:space-between;align-items:center;margin:6px 0 18px;padding:16px 18px;background:#fbf3e8;border:1.5px dashed #e0b793;border-radius:11px;}
+.tee-total .k{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:14px;color:#8a6a4e;}
+.tee-total .v{font-family:'Anton',sans-serif;font-size:32px;color:var(--ink);}
+.tee-total .v span{color:var(--orange);}
+
 /* ============ SPONSORS ============ */
 .presenting{text-align:center;margin-bottom:46px;}
 .presenting .eyebrow{display:block;margin-bottom:14px;}
@@ -285,6 +339,8 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
   .act-grid{grid-template-columns:repeat(2,1fr);}
   .sponsor-wall{grid-template-columns:repeat(2,1fr);}
   .map-row{grid-template-columns:1fr;}
+  .tee-row{grid-template-columns:1fr;gap:34px;}
+  .tee-stage{order:-1;max-width:440px;margin:0 auto;}
   .footer .top{grid-template-columns:1fr;gap:26px;}
 }
 @media(max-width:640px){
@@ -402,6 +458,7 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
       <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
       <nav class="links" id="navLinks">
         <a href="#vendors">Vendors</a>
+        <a href="#tees">Tees</a>
         <a href="#activities">Activities</a>
         <a href="teams.html">Teams</a>
         <a href="#sponsors">Sponsors</a>
@@ -457,6 +514,49 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
       <div class="feature">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 19c0-3 2.5-5 6-5s6 2 6 5"/><path d="M15.5 19c0-2 1-3.5 2.5-3.5s3 1.2 3 3.5"/></svg></div>
         <h3>Everyone Welcome</h3><p>All ages</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEES / MERCH PRESALE ============ -->
+  <section class="section tees" id="tees" data-screen-label="Tees">
+    <div class="wrap">
+      <div class="tee-row">
+        <div class="tee-stage">
+          <div class="tee-main">
+            <div class="tee-pricetag"><span class="pre">Pre-Order</span><span class="amt">$22</span></div>
+            <img id="teePreview" src="assets/tees/tee-black.webp" alt="Official Dottie Jordan 3 ON 3 For Peace event t-shirt — black" />
+          </div>
+          <div class="tee-swatches" id="teeSwatches">
+            <button class="tee-sw" type="button" data-color="Black" data-img="assets/tees/tee-black.webp" data-dot="#100f0e" aria-pressed="true"><span class="dot" style="background:#100f0e;"></span><span class="lbl">Black</span></button>
+            <button class="tee-sw" type="button" data-color="White" data-img="assets/tees/tee-white.webp" data-dot="#ffffff" aria-pressed="false"><span class="dot" style="background:#ffffff;"></span><span class="lbl">White</span></button>
+            <button class="tee-sw" type="button" data-color="Grey" data-img="assets/tees/tee-grey.webp" data-dot="#b8b8ba" aria-pressed="false"><span class="dot" style="background:#b8b8ba;"></span><span class="lbl">Grey</span></button>
+            <button class="tee-sw" type="button" data-color="Orange" data-img="assets/tees/tee-orange.webp" data-dot="#ec6a1f" aria-pressed="false"><span class="dot" style="background:#ec6a1f;"></span><span class="lbl">Orange</span></button>
+          </div>
+        </div>
+
+        <div class="tee-info">
+          <span class="eyebrow">Official Event Gear · Pre-Order Now</span>
+          <h2>Rep The Day In The <span class="o">Official Tee</span></h2>
+          <p class="lead">Front-logo event tee in four colorways. Pre-order now and save — pick yours up at Dottie Jordan Park on July&nbsp;11.</p>
+
+          <div class="tee-pricecompare">
+            <div class="now">$<span>22</span></div>
+            <div class="at">Pre-order price<br><b>$25</b> <s>at the event</s></div>
+          </div>
+
+          <ul class="tee-specs">
+            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg><span><b>Sizes S&ndash;4X.</b> S&ndash;2X at $22 &middot; 3X &amp; 4X add $3.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 8l4-4h8l4 4-3 3v9H7v-9z"/></svg><span><b>Front logo only</b> &mdash; full-color tournament crest.</span></li>
+            <li><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5M16 14c2.5 0 5 1.6 5 5"/></svg><span><b>Open to everyone</b> &mdash; players, families &amp; fans.</span></li>
+            <li><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5 5.6.6-4 4 1.1 5.4L12 20l-5.1 2 1.1-5.4-4-4 5.6-.6z"/></svg><span><b>4 colors:</b> Black, White, Grey &amp; Orange.</span></li>
+          </ul>
+
+          <div class="tee-cta-row">
+            <button class="btn lg" type="button" id="openTee">Pre-Order Your Tee</button>
+            <button class="btn ghost" type="button" id="viewTeeFlyer">View Flyer</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -627,6 +727,95 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
       </div>
     </div>
   </footer>
+
+  <!-- ============ TEE PRE-ORDER MODAL ============ -->
+  <div class="sp-modal tee-modal" id="teeModal" role="dialog" aria-modal="true" aria-labelledby="teeTitle">
+    <div class="sp-dialog">
+      <button class="sp-close" id="teeClose" type="button" aria-label="Close">&times;</button>
+      <div class="sp-head">
+        <span class="eyebrow">Official Event Tee · Pre-Order</span>
+        <h2 id="teeTitle">Pre-Order Your <span class="o">Tee</span></h2>
+        <p>Reserve your shirt now at the $22 pre-order price and pick it up at Dottie Jordan Park on July 11. The Mr Shorts team will confirm your order and pickup.</p>
+      </div>
+
+      <div class="sp-body">
+        <form id="teeForm" novalidate>
+          <div class="grid2">
+            <div class="field">
+              <label for="teeName">Your name <span class="req">*</span></label>
+              <input id="teeName" name="teeName" type="text" placeholder="First &amp; last name" required />
+              <div class="sp-err" data-for="teeName">Please enter your name.</div>
+            </div>
+            <div class="field">
+              <label for="teePhone">Phone <span class="req">*</span></label>
+              <input id="teePhone" name="teePhone" type="tel" placeholder="(512) 000-0000" required />
+              <div class="sp-err" data-for="teePhone">Please enter a phone number.</div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="teeEmail">Email <span class="req">*</span></label>
+            <input id="teeEmail" name="teeEmail" type="email" placeholder="you@email.com" required />
+            <div class="sp-err" data-for="teeEmail">Please enter a valid email.</div>
+          </div>
+
+          <div class="field">
+            <label>Color <span class="req">*</span></label>
+            <div class="swatch-row" id="teeColorRow">
+              <label class="csw"><input type="radio" name="teeColor" value="Black" checked /><span class="chip2"><i style="background:#100f0e;"></i>Black</span></label>
+              <label class="csw"><input type="radio" name="teeColor" value="White" /><span class="chip2"><i style="background:#ffffff;border-color:#cbb;"></i>White</span></label>
+              <label class="csw"><input type="radio" name="teeColor" value="Grey" /><span class="chip2"><i style="background:#b8b8ba;"></i>Grey</span></label>
+              <label class="csw"><input type="radio" name="teeColor" value="Orange" /><span class="chip2"><i style="background:#ec6a1f;"></i>Orange</span></label>
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="teeSize">Size <span class="req">*</span></label>
+              <select id="teeSize" name="teeSize">
+                <option value="S" data-price="22">Small — $22</option>
+                <option value="M" data-price="22">Medium — $22</option>
+                <option value="L" data-price="22">Large — $22</option>
+                <option value="XL" data-price="22">XL — $22</option>
+                <option value="2X" data-price="22">2X — $22</option>
+                <option value="3X" data-price="25">3X — $25</option>
+                <option value="4X" data-price="25">4X — $25</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Quantity <span class="req">*</span></label>
+              <div class="tee-qty">
+                <button type="button" id="teeMinus" aria-label="Decrease">&minus;</button>
+                <input id="teeQty" name="teeQty" type="number" min="1" max="50" value="1" inputmode="numeric" />
+                <button type="button" id="teePlus" aria-label="Increase">&plus;</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tee-total">
+            <span class="k">Estimated total</span>
+            <span class="v">$<span id="teeTotal">22</span></span>
+          </div>
+
+          <div class="field">
+            <label for="teeMsg">Need more sizes or have a question?</label>
+            <textarea id="teeMsg" name="teeMsg" placeholder="e.g. also add 1 White Large, or any questions... (optional)"></textarea>
+          </div>
+
+          <div class="sp-actions">
+            <button class="btn lg" type="submit">Place Pre-Order</button>
+            <span class="callnote">Prefer to talk? Call <a href="tel:5123507772">512-350-7772</a></span>
+          </div>
+        </form>
+
+        <div class="sp-success" id="teeSuccess">
+          <div class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+          <h3>Order Received!</h3>
+          <p id="teeSuccessMsg">We got your pre-order. The Mr Shorts team will confirm your tee and how to pick it up on July 11.</p>
+          <button class="btn" type="button" id="teeDone">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ============ BECOME A SPONSOR MODAL ============ -->
   <div class="sp-modal" id="spModal" role="dialog" aria-modal="true" aria-labelledby="spTitle">
@@ -850,6 +1039,110 @@ h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;line-height:.96;letter-s
       const upd=()=>sp.classList.toggle('previewable', s.hasAttribute('data-filled'));
       upd();new MutationObserver(upd).observe(s,{attributes:true,attributeFilter:['data-filled']});
     });
+
+    // ---- tee presale: color preview, order modal, total, submit ----
+    (function(){
+      const preview=document.getElementById('teePreview');
+      const swatches=[...document.querySelectorAll('#teeSwatches .tee-sw')];
+      swatches.forEach(sw=>sw.addEventListener('click',()=>{
+        swatches.forEach(s=>s.setAttribute('aria-pressed', s===sw?'true':'false'));
+        preview.src=sw.dataset.img;
+        preview.alt='Official Dottie Jordan 3 ON 3 For Peace event t-shirt — '+sw.dataset.color.toLowerCase();
+        const r=document.querySelector('#teeColorRow input[value="'+sw.dataset.color+'"]'); if(r)r.checked=true;
+      }));
+
+      // view flyer -> shared lightbox
+      const flyerBtn=document.getElementById('viewTeeFlyer');
+      if(flyerBtn)flyerBtn.addEventListener('click',()=>{
+        const src=(window.__resolveFlyer?window.__resolveFlyer('assets/tees/tee-flyer.webp'):'assets/tees/tee-flyer.webp');
+        gOpen([{src:src,name:'Official Event T-Shirts'}],0);
+      });
+
+      const modal=document.getElementById('teeModal');
+      const form=document.getElementById('teeForm');
+      const success=document.getElementById('teeSuccess');
+      const qtyEl=document.getElementById('teeQty');
+      const sizeEl=document.getElementById('teeSize');
+      const totalEl=document.getElementById('teeTotal');
+      let lastFocus=null;
+
+      function unitPrice(){const o=sizeEl.options[sizeEl.selectedIndex];return parseInt(o.dataset.price,10)||22;}
+      function qty(){let q=parseInt(qtyEl.value,10);if(isNaN(q)||q<1)q=1;if(q>50)q=50;return q;}
+      function recalc(){totalEl.textContent=unitPrice()*qty();}
+
+      document.getElementById('teePlus').addEventListener('click',()=>{qtyEl.value=Math.min(50,qty()+1);recalc();});
+      document.getElementById('teeMinus').addEventListener('click',()=>{qtyEl.value=Math.max(1,qty()-1);recalc();});
+      qtyEl.addEventListener('input',recalc);
+      sizeEl.addEventListener('change',recalc);
+
+      function open(){
+        lastFocus=document.activeElement;modal.classList.add('open');document.body.style.overflow='hidden';
+        // sync modal color to the currently-previewed swatch
+        const cur=document.querySelector('#teeSwatches .tee-sw[aria-pressed="true"]');
+        if(cur){const r=document.querySelector('#teeColorRow input[value="'+cur.dataset.color+'"]');if(r)r.checked=true;}
+        recalc();
+        const f=document.getElementById('teeName');setTimeout(()=>f&&f.focus(),60);
+      }
+      function close(){modal.classList.remove('open');document.body.style.overflow='';if(lastFocus)lastFocus.focus();
+        setTimeout(()=>{form.style.display='';success.classList.remove('show');form.reset();qtyEl.value=1;recalc();
+          form.querySelectorAll('.field.invalid').forEach(f=>f.classList.remove('invalid'));
+          form.querySelectorAll('.sp-err.show').forEach(e=>e.classList.remove('show'));},200);}
+
+      document.getElementById('openTee').addEventListener('click',open);
+      document.getElementById('teeClose').addEventListener('click',close);
+      document.getElementById('teeDone').addEventListener('click',close);
+      modal.addEventListener('click',e=>{if(e.target===modal)close();});
+      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+
+      function setErr(key,on){
+        const note=form.querySelector('.sp-err[data-for="'+key+'"]');
+        if(note)note.classList.toggle('show',on);
+        const field=note?note.closest('.field'):null;
+        if(field)field.classList.toggle('invalid',on);
+      }
+      form.addEventListener('input',e=>{const n=e.target.name;if(['teeName','teePhone','teeEmail'].includes(n))setErr(n,false);});
+
+      form.addEventListener('submit',e=>{
+        e.preventDefault();
+        let ok=true,firstBad=null;
+        ['teeName','teePhone','teeEmail'].forEach(k=>{
+          const el=form.elements[k];const empty=!el.value.trim();
+          const bad=k==='teeEmail'?(empty||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value)):empty;
+          setErr(k,bad);if(bad){ok=false;firstBad=firstBad||el;}
+        });
+        if(!ok){if(firstBad&&firstBad.focus)firstBad.focus();return;}
+
+        const TEE_EMAIL='stoneyw@gmail.com';
+        const g=id=>(form.elements[id]&&form.elements[id].value.trim())||'—';
+        const color=(form.querySelector('input[name="teeColor"]:checked')||{}).value||'—';
+        const size=sizeEl.value, q=qty(), total=unitPrice()*q;
+        const body=[
+          'NEW TEE PRE-ORDER — Dottie Jordan 3 ON 3 For Peace (July 11)',
+          '',
+          'Color:    '+color,
+          'Size:     '+size,
+          'Quantity: '+q,
+          'Estimated total: $'+total+' (pre-order price)',
+          '',
+          'Name:  '+g('teeName'),
+          'Phone: '+g('teePhone'),
+          'Email: '+g('teeEmail'),
+          '',
+          'Notes / additional sizes:',
+          '  '+g('teeMsg'),
+          '',
+          '— Sent from the 3ON3 For Peace tee pre-order form'
+        ].join('\n');
+        window.location.href='mailto:'+TEE_EMAIL+
+          '?subject='+encodeURIComponent('Tee Pre-Order ('+q+'x '+color+' '+size+') — '+g('teeName'))+
+          '&body='+encodeURIComponent(body);
+
+        document.getElementById('teeSuccessMsg').textContent=
+          'Your email app just opened with your order ('+q+'x '+color+' '+size+', $'+total+') ready — hit send to finish. The Mr Shorts team will confirm your tee and pickup on July 11.';
+        form.style.display='none';
+        success.classList.add('show');
+      });
+    })();
   </script>
 </body>
 </html>
